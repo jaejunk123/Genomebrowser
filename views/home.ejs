@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <%= title %> SNUH genome browser</title>
+
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+</head>
+<body class="body">
+   <!-- <div class="topnav">
+        <div class="container">
+            <a id="logo" href="../home">SNUH<img id="logoImg" src="images/u27.png" width="18px" height="23px"></a>
+            <a href="../home/login">Login</a>
+            <a href="../home/discussion">Discussion</a>
+            <a href="../home/faq">FAQ</a>
+            <a href="../home/downloads">Downloads</a>
+            <a href="../home/news">News</a>
+            <a href="../home/about">About</a>
+        </div>
+    </div> -->
+    <div><% include ./header.ejs %></div>
+
+    <div class="titleBox">
+        <div class="container">
+            <div class="text">
+                <p>
+                    <span style="font-size:60px; color:#00348B">SNU</span><span style="font-size:60px; color:#0F8CCF">H </span>
+                    <span style="font-size:60px; color:#498DB2">Genome Browser</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="searchBox">
+        <div class="container">
+            <div class="searchTextField">
+                <input class="searchInput" type="search" value="" style="color: #999999;" placeholder="Search for a gene or variant or region"><button class="searchBtn" onclick="searchBtnClicked()">Search</button>
+                <div class="textBox" style="text-align: left;  padding-left: 20px;">
+                    <p style="font-size: 12px; margin-top:20px;">Examples - Gene:<span style="color: #8CCCCC">PCSK9</span>, Variant:<span style="color: #8CCCCC">22-46615880-T-C</span>, Region:<span style="color: #8CCCCC">22:46615715-46615880</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p style="text-align: center; margin-top: 100px; margin-bottom: 0px; font-size: 13px;">SNUH Genome browser Version 0.0.1</p>
+        <p style="text-align: center; font-size: 13px;">Question and feedback: jeleedict@snu.ac.kr</p>
+    </footer>
+
+    <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        &(document).ready(function() {
+            $("#header").load("header.ejs")
+        })
+
+        function searchBtnClicked() {
+            var searchWord = $('.searchInput').val();
+            console.log(searchWord);
+            $('.searchInput').val('');
+        }
+    </script>
+</body>
+
+</html>

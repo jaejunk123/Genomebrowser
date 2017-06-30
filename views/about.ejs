@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <%= title %> SNUH genome browser</title>
+
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+</head>
+
+<body class="body" onload="addTableRow()">
+    <div><% include ./header.ejs %></div>
+
+    <div class="upload_sesstion">
+    	<p style="margin-top: 50px; display: inline-block;"><span style="font-family: 'Roboto Bold', 'Roboto Regular', 'Roboto'; font-size: 20px; font-weight: bold; text-align: left;">Last uploads >></span></p>
+    	<div class="upload">
+    		<img id="upload_Img" src="../images/u3938.png" width="20px" height="20px"><span>New upload</span>
+    	</div>
+    </div>
+
+    <table class="table table-bordered" id="ttb">
+    	<thead class="thead-inverse">
+    		<tr>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 50px">#</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 90px">Last edit</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 90px">Sample ID</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 80px">Patient ID</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 61px">Name</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 61px">Sex</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 61px">Age</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 61px">Tissue</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 100px">Diagonosis</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 50px">QC</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 50px">SNP</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 50px">Fusion</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 50px">CNV</th>
+                <th id="ttb-th" style="vertical-align: middle; text-align: center; width: 50px">Check</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 50px">Large<br>indel</th>
+    			<th id="ttb-th" style="vertical-align: middle; text-align: center; width: 59px">Data<br>Status</th>
+                <th id="ttb-th" style="vertical-align: middle; text-align: center; width: 63px">Edit</th>
+    		</tr>
+    	</thead>
+    	<tbody id="sample_TB">
+    	</tbody>
+	</table>
+
+    <div class="table-page" style="margin-top: 10px;">
+        <div class="container">
+            <div class="pagination">
+                <a class="first-arrow" href="#">&laquo;</a>
+                <a class="prev-arrow" href="#">&lsaquo;</a>
+                <a class="pageActive" href="#">1</a>
+                <a class href="#">2</a>
+                <a class href="#">3</a>
+                <a class href="#">4</a>
+                <a class href="#">5</a>
+                <a class href="#">6</a>
+                <a class="next-arrow" href="#">&rsaquo;</a>
+                <a class="last-arrow" href="#">&raquo;</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p style="text-align: center; margin-top: 100px; margin-bottom: 0px; font-size: 13px;">SNUH Genome browser Version 0.0.1</p>
+        <p style="text-align: center; font-size: 13px;">Question and feedback: jeleedict@snu.ac.kr</p>
+    </footer>
+
+    <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        var tableItems = [
+            [
+                ["2017-05-24", "SCP2_0043", "P000006", "XXX", "M", "46", "Bone", "Melanoma", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-24", "SCP2_0042", "P000007", "OOO", "F", "72", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-24", "SCP2_B030", "P000008", "UUU", "F", "81", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-24", "SCP2_C100", "P000009", "WWW", "M", "59", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-24", "SCP2_I031", "P000010", "ZZZ", "M", "68", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "accept", "click"],
+                ["2017-05-24", "SCP2_0043", "P000006", "XXX", "M", "46", "Bone", "Melanoma", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-24", "SCP2_0042", "P000007", "OOO", "F", "72", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-24", "SCP2_B030", "P000008", "UUU", "F", "81", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-24", "SCP2_C100", "P000009", "WWW", "M", "59", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-24", "SCP2_I031", "P000010", "ZZZ", "M", "68", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "accept", "click"]
+            ],
+            [
+                ["2017-05-23", "SCP2_0045", "P000016", "AAA", "F", "21", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-23", "SCP2_0044", "P000017", "BBB", "F", "40", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-23", "SCP2_B031", "P000018", "CCC", "F", "66", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-23", "SCP2_C103", "P000019", "DDD", "F", "32", "Bone", "Melanoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-23", "SCP2_I035", "P000020", "EEE", "M", "70", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "accept", "click"],
+                ["2017-05-23", "SCP2_0045", "P000016", "AAA", "F", "21", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-23", "SCP2_0044", "P000017", "BBB", "F", "40", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-23", "SCP2_B031", "P000018", "CCC", "F", "66", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-23", "SCP2_C103", "P000019", "DDD", "F", "32", "Bone", "Melanoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-23", "SCP2_I035", "P000020", "EEE", "M", "70", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "accept", "click"]
+            ],
+            [
+                ["2017-05-22", "SCP2_0043", "P000006", "XXX", "M", "46", "Bone", "Melanoma", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-22", "SCP2_0042", "P000007", "OOO", "F", "72", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-22", "SCP2_B030", "P000008", "UUU", "F", "81", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-22", "SCP2_C100", "P000009", "WWW", "M", "59", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-22", "SCP2_I031", "P000010", "ZZZ", "M", "68", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "accept", "click"],
+                ["2017-05-22", "SCP2_0043", "P000006", "XXX", "M", "46", "Bone", "Melanoma", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-22", "SCP2_0042", "P000007", "OOO", "F", "72", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-22", "SCP2_B030", "P000008", "UUU", "F", "81", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-22", "SCP2_C100", "P000009", "WWW", "M", "59", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-22", "SCP2_I031", "P000010", "ZZZ", "M", "68", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "accept", "click"]
+            ],
+            [
+                ["2017-05-21", "SCP2_0045", "P000016", "AAA", "F", "21", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-21", "SCP2_0044", "P000017", "BBB", "F", "40", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-21", "SCP2_B031", "P000018", "CCC", "F", "66", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-21", "SCP2_C103", "P000019", "DDD", "F", "32", "Bone", "Melanoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-21", "SCP2_I035", "P000020", "EEE", "M", "70", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "accept", "click"],
+                ["2017-05-21", "SCP2_0045", "P000016", "AAA", "F", "21", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-21", "SCP2_0044", "P000017", "BBB", "F", "40", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-21", "SCP2_B031", "P000018", "CCC", "F", "66", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-21", "SCP2_C103", "P000019", "DDD", "F", "32", "Bone", "Melanoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-21", "SCP2_I035", "P000020", "EEE", "M", "70", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "accept", "click"]
+            ],
+            [
+                ["2017-05-20", "SCP2_0043", "P000006", "XXX", "M", "46", "Bone", "Melanoma", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-20", "SCP2_0042", "P000007", "OOO", "F", "72", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-20", "SCP2_B030", "P000008", "UUU", "F", "81", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-20", "SCP2_C100", "P000009", "WWW", "M", "59", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-20", "SCP2_I031", "P000010", "ZZZ", "M", "68", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "accept", "click"],
+                ["2017-05-20", "SCP2_0043", "P000006", "XXX", "M", "46", "Bone", "Melanoma", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-20", "SCP2_0042", "P000007", "OOO", "F", "72", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-20", "SCP2_B030", "P000008", "UUU", "F", "81", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-20", "SCP2_C100", "P000009", "WWW", "M", "59", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-20", "SCP2_I031", "P000010", "ZZZ", "M", "68", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "accept", "click"]
+            ],
+            [
+                ["2017-05-19", "SCP2_0045", "P000016", "AAA", "F", "21", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-19", "SCP2_0044", "P000017", "BBB", "F", "40", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-19", "SCP2_B031", "P000018", "CCC", "F", "66", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-19", "SCP2_C103", "P000019", "DDD", "F", "32", "Bone", "Melanoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-19", "SCP2_I035", "P000020", "EEE", "M", "70", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "accept", "click"],
+                ["2017-05-19", "SCP2_0045", "P000016", "AAA", "F", "21", "Colon", "Colon cancer", "1", "1", "1", "1", "1", "X", "?", "click"],
+                ["2017-05-19", "SCP2_0044", "P000017", "BBB", "F", "40", "Brain", "Glioblastoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-19", "SCP2_B031", "P000018", "CCC", "F", "66", "Breast", "Breast carcinoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-19", "SCP2_C103", "P000019", "DDD", "F", "32", "Bone", "Melanoma", "1", "1", "1", "1", "1", "O", "pending", "click"],
+                ["2017-05-19", "SCP2_I035", "P000020", "EEE", "M", "70", "Skin", "Skin squamous carcinoma", "1", "1", "1", "1", "1", "O", "accept", "click"]
+            ]
+        ];
+
+    	function addTableRow() {
+            var myTable = document.getElementById('sample_TB');
+            var tableRow;
+            var tableCell;
+
+    		console.log("addTableRow");
+
+            for (var i = 0; i < tableItems[0].length; i++) {
+                tableRow = myTable.insertRow(i);
+                for (var j = 0; j < tableItems[0][i].length; j++) {
+                    tableCell = tableRow.insertCell(j);
+                    tableCell.id = 'ttb-cell';
+                    if (j == tableItems[0][i].length - 1) {
+                        var link = document.createElement("a");
+                        link.setAttribute("href", "../home");
+                        var linkText = document.createTextNode("Click");
+                        link.appendChild(linkText);
+                        tableCell.appendChild(link);
+                    }
+                    else {
+                        tableCell.innerHTML = tableItems[0][i][j];
+                    }
+                }
+                tableCell = tableRow.insertCell(0);
+                tableCell.id = 'ttb-cell';
+                tableCell.innerHTML = i + 1;
+            }
+        }
+
+        var newPageNumber = 1;
+        var pageNumber = 1;
+
+        $(".first-arrow").click(function() {
+            $(".pageActive").toggleClass("pageActive");
+            $(".pagination").children().eq(2).toggleClass("pageActive");
+            newPageNumber = 1
+            refreshTable();
+        })
+
+        $(".prev-arrow").click(function() {
+            var selectedPage = $(".pageActive");
+            if (selectedPage.text() != 1) {
+                selectedPage.toggleClass("pageActive");
+                selectedPage.prev().toggleClass("pageActive");
+                newPageNumber = selectedPage.prev().text();
+                refreshTable();
+            }
+        })
+
+        $(".next-arrow").click(function() {
+            var selectedPage = $(".pageActive");
+            if (selectedPage.text() != 6) {
+                selectedPage.toggleClass("pageActive");
+                selectedPage.next().toggleClass("pageActive");
+                newPageNumber = selectedPage.next().text();  
+                refreshTable();
+            }
+        })
+
+        $(".last-arrow").click(function() {
+            $(".pageActive").toggleClass("pageActive");
+            $(".pagination").children().last().prev().prev().toggleClass("pageActive");
+            newPageNumber = $(".pagination").children().last().prev().prev().text();
+            refreshTable();
+        })
+
+        $(".pagination").children().click(function() {
+            if (($(this).attr('class') != "first-arrow") && ($(this).attr('class') != "prev-arrow") && ($(this).attr('class') != "next-arrow") && ($(this).attr('class') != "last-arrow")) {
+                console.log("number click");
+                $(".pageActive").toggleClass("pageActive");
+                console.log($(this).text());
+                $(this).toggleClass("pageActive");
+                newPageNumber = $(this).text();
+                refreshTable();
+            }
+        })
+
+        function refreshTable() {
+            console.log("refreshTable");
+
+            var myTable = document.getElementById('sample_TB');
+            var tableRow;
+            var tableCell;
+
+            for (var i = 0; i < tableItems[pageNumber - 1].length; i++) {
+                console.log(i);
+                console.log(pageNumber - 1);
+                myTable.deleteRow(0);
+            }
+
+            for (var i = 0; i < tableItems[newPageNumber - 1].length; i++) {
+                tableRow = myTable.insertRow(i);
+                for (var j = 0; j < tableItems[newPageNumber - 1][i].length; j++) {
+                    tableCell = tableRow.insertCell(j);
+                    tableCell.id = 'ttb-cell';
+                    if (j == tableItems[newPageNumber - 1][i].length - 1) {
+                        var link = document.createElement("a");
+                        link.setAttribute("href", "../home");
+                        var linkText = document.createTextNode("Click");
+                        link.appendChild(linkText);
+                        tableCell.appendChild(link);
+                    }
+                    else {
+                        tableCell.innerHTML = tableItems[newPageNumber - 1][i][j];
+                    }
+                }
+                tableCell = tableRow.insertCell(0);
+                tableCell.id = 'ttb-cell';
+                tableCell.innerHTML = i + 1;
+            }
+
+            pageNumber = newPageNumber;
+        }
+    </script>
+</body>
+
+</html>

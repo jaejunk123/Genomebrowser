@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <%= title %> SNUH genome browser</title>
+
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+</head>
+
+<body class="body">
+    <div><% include ./header.ejs %></div>
+        
+    <div class="loginBox">
+        <div class="loginTB">
+            <div class="idTextField">
+                <input class="idInput" type="search" value="" style="color: #999999;" placeholder="ID or Email">
+            </div>
+            <div class="passwordTextField">
+                <input class="passwordInput" type="search" value="" style="color: #999999;" placeholder="Password">
+            </div>
+        </div>
+        <div class="buttonTB" ng-controller="loginController">
+            <form action="/loginController/requestLogin" class="" id="login_form">
+            <button class="loginBtn">Login</button>
+        </div>
+        <div class="signUpTB" style="text-align: center;">
+            <p style="display: inline-block; margin: 20px;"><span style="font-weight: 700; font-size: 16px; color: #3399FF; text-align: center;">Sign up</span></p><p style="display: inline-block; margin: 20px;"><span style="font-weight: 700; font-size: 16px; color: #3399FF; text-align: center;">Forgot password?</span></p>
+        </div>
+    </div>
+    <footer>
+        <p style="text-align: center; margin-top: 100px; margin-bottom: 0px; font-size: 13px;">SNUH Genome browser Version 0.0.1</p>
+        <p style="text-align: center; font-size: 13px;">Question and feedback: jeleedict@snu.ac.kr</p>
+    </footer>
+
+    <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+    //$(".loginBtn").click(function() {
+        //window.location.href = '../home/about';
+    $("#login_form").on(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            type:'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(){
+                console.log("으앙 됐다")
+            }
+        })
+    })
+
+    </script>
+</body>
+
+</html>
